@@ -13,11 +13,13 @@ class Tokin_RandomFlagEntry
 class Tokin_RandomFlagConfig
 {
 	int Version;
+	float OpenActionSeconds;
 	ref array<ref Tokin_RandomFlagEntry> Flags;
 
 	void Tokin_RandomFlagConfig()
 	{
 		Version = 1;
+		OpenActionSeconds = 2.0;
 		Flags = new array<ref Tokin_RandomFlagEntry>;
 	}
 }
@@ -26,6 +28,8 @@ class Tokin_RandomFlagConfigManager
 {
 	static const string CONFIG_DIRECTORY = "$profile:Tokin";
 	static const string CONFIG_PATH = "$profile:Tokin/RandomFlagConfig.json";
+	static const float DEFAULT_OPEN_ACTION_SECONDS = 2.0;
+	static const float MINIMUM_OPEN_ACTION_SECONDS = 1.0;
 
 	protected static ref Tokin_RandomFlagConfig s_Config;
 	protected static ref array<ref Tokin_RandomFlagEntry> s_ValidFlags;
@@ -59,9 +63,24 @@ class Tokin_RandomFlagConfigManager
 			}
 		}
 
+		ValidateOpenActionSeconds();
 		BuildValidFlagPool();
 
 		Print("[Random Flag] Loaded " + s_ValidFlags.Count() + " valid flag entries from " + CONFIG_PATH + ".");
+	}
+
+	static float GetOpenActionSeconds()
+	{
+		if (!s_LoadAttempted)
+			Load();
+
+		if (!s_Config)
+			return DEFAULT_OPEN_ACTION_SECONDS;
+
+		if (s_Config.OpenActionSeconds < MINIMUM_OPEN_ACTION_SECONDS)
+			return MINIMUM_OPEN_ACTION_SECONDS;
+
+		return s_Config.OpenActionSeconds;
 	}
 
 	static string GetRandomFlagClassName()
@@ -131,6 +150,18 @@ class Tokin_RandomFlagConfigManager
 			}
 
 			s_ValidFlags.Insert(flag_entry);
+		}
+	}
+
+	protected static void ValidateOpenActionSeconds()
+	{
+		if (!s_Config)
+			return;
+
+		if (s_Config.OpenActionSeconds < MINIMUM_OPEN_ACTION_SECONDS)
+		{
+			ErrorEx("[Random Flag] OpenActionSeconds cannot be less than 1 second. Using the minimum of 1 second.");
+			s_Config.OpenActionSeconds = MINIMUM_OPEN_ACTION_SECONDS;
 		}
 	}
 

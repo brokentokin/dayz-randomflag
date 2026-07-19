@@ -2,7 +2,12 @@ class Tokin_ActionOpenFlagCB : ActionContinuousBaseCB
 {
 	override void CreateActionComponent()
 	{
-		m_ActionData.m_ActionComponent = new CAContinuousTime(2.0);
+		float open_action_seconds = 2.0;
+		Tokin_RandomFlag folded_flag = Tokin_RandomFlag.Cast(m_ActionData.m_MainItem);
+		if (folded_flag)
+			open_action_seconds = folded_flag.GetOpenActionSeconds();
+
+		m_ActionData.m_ActionComponent = new CAContinuousTime(open_action_seconds);
 	}
 }
 

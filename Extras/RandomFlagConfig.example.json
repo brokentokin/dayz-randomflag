@@ -1,5 +1,6 @@
 {
     "Version": 1,
+    "OpenActionSeconds": 2.0,
     "Flags": [
         { "ClassName": "Flag_APA", "Weight": 1.0 },
         { "ClassName": "Flag_Altis", "Weight": 1.0 },

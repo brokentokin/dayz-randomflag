@@ -136,9 +136,16 @@ class SoL_RandomFlagConfigManager
 
 	protected static bool ClassExists(string class_name)
 	{
-		return GetGame().ConfigIsExisting("CfgVehicles " + class_name)
-			|| GetGame().ConfigIsExisting("CfgWeapons " + class_name)
-			|| GetGame().ConfigIsExisting("CfgMagazines " + class_name);
+		if (GetGame().ConfigIsExisting("CfgVehicles " + class_name))
+			return true;
+
+		if (GetGame().ConfigIsExisting("CfgWeapons " + class_name))
+			return true;
+
+		if (GetGame().ConfigIsExisting("CfgMagazines " + class_name))
+			return true;
+
+		return false;
 	}
 
 	protected static void SaveDefaultConfig()

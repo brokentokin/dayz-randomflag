@@ -1,0 +1,203 @@
+class SoL_RandomFlagEntry
+{
+	string ClassName;
+	float Weight;
+
+	void SoL_RandomFlagEntry(string class_name = "", float weight = 1.0)
+	{
+		ClassName = class_name;
+		Weight = weight;
+	}
+}
+
+class SoL_RandomFlagConfig
+{
+	int Version;
+	ref array<ref SoL_RandomFlagEntry> Flags;
+
+	void SoL_RandomFlagConfig()
+	{
+		Version = 1;
+		Flags = new array<ref SoL_RandomFlagEntry>;
+	}
+}
+
+class SoL_RandomFlagConfigManager
+{
+	static const string CONFIG_DIRECTORY = "$profile:SoLMods";
+	static const string CONFIG_PATH = "$profile:SoLMods/RandomFlagConfig.json";
+
+	protected static ref SoL_RandomFlagConfig s_Config;
+	protected static ref array<ref SoL_RandomFlagEntry> s_ValidFlags;
+	protected static bool s_LoadAttempted;
+
+	static void Load()
+	{
+		if (!GetGame() || !GetGame().IsServer())
+			return;
+
+		s_LoadAttempted = true;
+		s_ValidFlags = new array<ref SoL_RandomFlagEntry>;
+
+		MakeDirectory(CONFIG_DIRECTORY);
+
+		if (!FileExist(CONFIG_PATH))
+		{
+			s_Config = CreateDefaultConfig();
+			SaveDefaultConfig();
+		}
+		else
+		{
+			s_Config = new SoL_RandomFlagConfig();
+
+			string load_error;
+			if (!JsonFileLoader<SoL_RandomFlagConfig>.LoadFile(CONFIG_PATH, s_Config, load_error))
+			{
+				ErrorEx("[Random Flag] " + load_error);
+				ErrorEx("[Random Flag] Configuration was not loaded. Folded Flags will not be consumed.");
+				return;
+			}
+		}
+
+		BuildValidFlagPool();
+
+		Print("[Random Flag] Loaded " + s_ValidFlags.Count() + " valid flag entries from " + CONFIG_PATH + ".");
+	}
+
+	static string GetRandomFlagClassName()
+	{
+		if (!s_LoadAttempted)
+			Load();
+
+		if (!s_ValidFlags || s_ValidFlags.Count() == 0)
+		{
+			ErrorEx("[Random Flag] No valid, positively weighted flag entries are available.");
+			return "";
+		}
+
+		float total_weight = 0.0;
+		foreach (SoL_RandomFlagEntry weighted_flag : s_ValidFlags)
+		{
+			total_weight += weighted_flag.Weight;
+		}
+
+		float roll = Math.RandomFloat(0.0, total_weight);
+		float cumulative_weight = 0.0;
+
+		foreach (SoL_RandomFlagEntry candidate : s_ValidFlags)
+		{
+			cumulative_weight += candidate.Weight;
+			if (roll < cumulative_weight)
+				return candidate.ClassName;
+		}
+
+		// Floating-point safety fallback. This should only be reachable if the
+		// random value lands on the upper boundary because of engine rounding.
+		return s_ValidFlags.Get(s_ValidFlags.Count() - 1).ClassName;
+	}
+
+	protected static void BuildValidFlagPool()
+	{
+		if (!s_Config || !s_Config.Flags)
+		{
+			ErrorEx("[Random Flag] The configuration has no Flags array.");
+			return;
+		}
+
+		foreach (SoL_RandomFlagEntry flag_entry : s_Config.Flags)
+		{
+			if (!flag_entry)
+			{
+				ErrorEx("[Random Flag] Ignoring a null entry in Flags.");
+				continue;
+			}
+
+			if (flag_entry.ClassName == "")
+			{
+				ErrorEx("[Random Flag] Ignoring an entry with an empty ClassName.");
+				continue;
+			}
+
+			if (flag_entry.Weight <= 0.0)
+			{
+				ErrorEx("[Random Flag] Ignoring " + flag_entry.ClassName + " because Weight must be greater than zero.");
+				continue;
+			}
+
+			if (!ClassExists(flag_entry.ClassName))
+			{
+				ErrorEx("[Random Flag] Ignoring missing classname " + flag_entry.ClassName + ". Check that its providing mod is loaded.");
+				continue;
+			}
+
+			s_ValidFlags.Insert(flag_entry);
+		}
+	}
+
+	protected static bool ClassExists(string class_name)
+	{
+		return GetGame().ConfigIsExisting("CfgVehicles " + class_name)
+			|| GetGame().ConfigIsExisting("CfgWeapons " + class_name)
+			|| GetGame().ConfigIsExisting("CfgMagazines " + class_name);
+	}
+
+	protected static void SaveDefaultConfig()
+	{
+		string save_error;
+		if (!JsonFileLoader<SoL_RandomFlagConfig>.SaveFile(CONFIG_PATH, s_Config, save_error))
+		{
+			ErrorEx("[Random Flag] " + save_error);
+			ErrorEx("[Random Flag] The in-memory defaults will remain active for this server session.");
+			return;
+		}
+
+		Print("[Random Flag] Created default configuration at " + CONFIG_PATH + ".");
+	}
+
+	protected static SoL_RandomFlagConfig CreateDefaultConfig()
+	{
+		SoL_RandomFlagConfig config = new SoL_RandomFlagConfig();
+
+		AddDefaultFlag(config, "Flag_APA");
+		AddDefaultFlag(config, "Flag_Altis");
+		AddDefaultFlag(config, "Flag_BabyDeer");
+		AddDefaultFlag(config, "Flag_Bear");
+		AddDefaultFlag(config, "Flag_Bohemia");
+		AddDefaultFlag(config, "Flag_BrainZ");
+		AddDefaultFlag(config, "Flag_CDF");
+		AddDefaultFlag(config, "Flag_CHEL");
+		AddDefaultFlag(config, "Flag_CMC");
+		AddDefaultFlag(config, "Flag_Cannibals");
+		AddDefaultFlag(config, "Flag_Chedaki");
+		AddDefaultFlag(config, "Flag_Chernarus");
+		AddDefaultFlag(config, "Flag_Crook");
+		AddDefaultFlag(config, "Flag_DayZ");
+		AddDefaultFlag(config, "Flag_HunterZ");
+		AddDefaultFlag(config, "Flag_Livonia");
+		AddDefaultFlag(config, "Flag_LivoniaArmy");
+		AddDefaultFlag(config, "Flag_LivoniaPolice");
+		AddDefaultFlag(config, "Flag_NAPA");
+		AddDefaultFlag(config, "Flag_NSahrani");
+		AddDefaultFlag(config, "Flag_Pirates");
+		AddDefaultFlag(config, "Flag_RSTA");
+		AddDefaultFlag(config, "Flag_Refuge");
+		AddDefaultFlag(config, "Flag_Rex");
+		AddDefaultFlag(config, "Flag_Rooster");
+		AddDefaultFlag(config, "Flag_SSahrani");
+		AddDefaultFlag(config, "Flag_Sakhal");
+		AddDefaultFlag(config, "Flag_Snake");
+		AddDefaultFlag(config, "Flag_TEC");
+		AddDefaultFlag(config, "Flag_UEC");
+		AddDefaultFlag(config, "Flag_White");
+		AddDefaultFlag(config, "Flag_Wolf");
+		AddDefaultFlag(config, "Flag_Zagorky");
+		AddDefaultFlag(config, "Flag_Zenit");
+
+		return config;
+	}
+
+	protected static void AddDefaultFlag(SoL_RandomFlagConfig config, string class_name)
+	{
+		config.Flags.Insert(new SoL_RandomFlagEntry(class_name, 1.0));
+	}
+}

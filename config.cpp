@@ -1,10 +1,10 @@
 class CfgPatches
 {
-	class SoL_RandomFlag
+	class Tokin_RandomFlag
 	{
 		units[] =
 		{
-			"SoL_RandomFlag"
+			"Tokin_RandomFlag"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -19,11 +19,11 @@ class CfgPatches
 
 class CfgMods
 {
-	class SoL_RandomFlag
+	class Tokin_RandomFlag
 	{
 		dir = "RandomFlag";
 		name = "Random Flag";
-		author = "SoL";
+		author = "Tokin";
 		version = "1.0.0";
 		type = "mod";
 		dependencies[] =
@@ -69,7 +69,7 @@ class CfgVehicles
 {
 	class Flag_White;
 
-	class SoL_RandomFlag : Flag_White
+	class Tokin_RandomFlag : Flag_White
 	{
 		scope = 2;
 		displayName = "Folded Flag";

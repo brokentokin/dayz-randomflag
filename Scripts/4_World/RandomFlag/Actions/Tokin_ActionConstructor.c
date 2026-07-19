@@ -3,6 +3,6 @@ modded class ActionConstructor
 	override void RegisterActions(TTypenameArray actions)
 	{
 		super.RegisterActions(actions);
-		actions.Insert(SoL_ActionOpenFlag);
+		actions.Insert(Tokin_ActionOpenFlag);
 	}
 }

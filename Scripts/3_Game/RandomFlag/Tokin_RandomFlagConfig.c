@@ -1,34 +1,34 @@
-class SoL_RandomFlagEntry
+class Tokin_RandomFlagEntry
 {
 	string ClassName;
 	float Weight;
 
-	void SoL_RandomFlagEntry(string class_name = "", float weight = 1.0)
+	void Tokin_RandomFlagEntry(string class_name = "", float weight = 1.0)
 	{
 		ClassName = class_name;
 		Weight = weight;
 	}
 }
 
-class SoL_RandomFlagConfig
+class Tokin_RandomFlagConfig
 {
 	int Version;
-	ref array<ref SoL_RandomFlagEntry> Flags;
+	ref array<ref Tokin_RandomFlagEntry> Flags;
 
-	void SoL_RandomFlagConfig()
+	void Tokin_RandomFlagConfig()
 	{
 		Version = 1;
-		Flags = new array<ref SoL_RandomFlagEntry>;
+		Flags = new array<ref Tokin_RandomFlagEntry>;
 	}
 }
 
-class SoL_RandomFlagConfigManager
+class Tokin_RandomFlagConfigManager
 {
-	static const string CONFIG_DIRECTORY = "$profile:SoLMods";
-	static const string CONFIG_PATH = "$profile:SoLMods/RandomFlagConfig.json";
+	static const string CONFIG_DIRECTORY = "$profile:Tokin";
+	static const string CONFIG_PATH = "$profile:Tokin/RandomFlagConfig.json";
 
-	protected static ref SoL_RandomFlagConfig s_Config;
-	protected static ref array<ref SoL_RandomFlagEntry> s_ValidFlags;
+	protected static ref Tokin_RandomFlagConfig s_Config;
+	protected static ref array<ref Tokin_RandomFlagEntry> s_ValidFlags;
 	protected static bool s_LoadAttempted;
 
 	static void Load()
@@ -37,7 +37,7 @@ class SoL_RandomFlagConfigManager
 			return;
 
 		s_LoadAttempted = true;
-		s_ValidFlags = new array<ref SoL_RandomFlagEntry>;
+		s_ValidFlags = new array<ref Tokin_RandomFlagEntry>;
 
 		MakeDirectory(CONFIG_DIRECTORY);
 
@@ -48,10 +48,10 @@ class SoL_RandomFlagConfigManager
 		}
 		else
 		{
-			s_Config = new SoL_RandomFlagConfig();
+			s_Config = new Tokin_RandomFlagConfig();
 
 			string load_error;
-			if (!JsonFileLoader<SoL_RandomFlagConfig>.LoadFile(CONFIG_PATH, s_Config, load_error))
+			if (!JsonFileLoader<Tokin_RandomFlagConfig>.LoadFile(CONFIG_PATH, s_Config, load_error))
 			{
 				ErrorEx("[Random Flag] " + load_error);
 				ErrorEx("[Random Flag] Configuration was not loaded. Folded Flags will not be consumed.");
@@ -76,7 +76,7 @@ class SoL_RandomFlagConfigManager
 		}
 
 		float total_weight = 0.0;
-		foreach (SoL_RandomFlagEntry weighted_flag : s_ValidFlags)
+		foreach (Tokin_RandomFlagEntry weighted_flag : s_ValidFlags)
 		{
 			total_weight += weighted_flag.Weight;
 		}
@@ -84,7 +84,7 @@ class SoL_RandomFlagConfigManager
 		float roll = Math.RandomFloat(0.0, total_weight);
 		float cumulative_weight = 0.0;
 
-		foreach (SoL_RandomFlagEntry candidate : s_ValidFlags)
+		foreach (Tokin_RandomFlagEntry candidate : s_ValidFlags)
 		{
 			cumulative_weight += candidate.Weight;
 			if (roll < cumulative_weight)
@@ -104,7 +104,7 @@ class SoL_RandomFlagConfigManager
 			return;
 		}
 
-		foreach (SoL_RandomFlagEntry flag_entry : s_Config.Flags)
+		foreach (Tokin_RandomFlagEntry flag_entry : s_Config.Flags)
 		{
 			if (!flag_entry)
 			{
@@ -151,7 +151,7 @@ class SoL_RandomFlagConfigManager
 	protected static void SaveDefaultConfig()
 	{
 		string save_error;
-		if (!JsonFileLoader<SoL_RandomFlagConfig>.SaveFile(CONFIG_PATH, s_Config, save_error))
+		if (!JsonFileLoader<Tokin_RandomFlagConfig>.SaveFile(CONFIG_PATH, s_Config, save_error))
 		{
 			ErrorEx("[Random Flag] " + save_error);
 			ErrorEx("[Random Flag] The in-memory defaults will remain active for this server session.");
@@ -161,9 +161,9 @@ class SoL_RandomFlagConfigManager
 		Print("[Random Flag] Created default configuration at " + CONFIG_PATH + ".");
 	}
 
-	protected static SoL_RandomFlagConfig CreateDefaultConfig()
+	protected static Tokin_RandomFlagConfig CreateDefaultConfig()
 	{
-		SoL_RandomFlagConfig config = new SoL_RandomFlagConfig();
+		Tokin_RandomFlagConfig config = new Tokin_RandomFlagConfig();
 
 		AddDefaultFlag(config, "Flag_APA");
 		AddDefaultFlag(config, "Flag_Altis");
@@ -203,8 +203,8 @@ class SoL_RandomFlagConfigManager
 		return config;
 	}
 
-	protected static void AddDefaultFlag(SoL_RandomFlagConfig config, string class_name)
+	protected static void AddDefaultFlag(Tokin_RandomFlagConfig config, string class_name)
 	{
-		config.Flags.Insert(new SoL_RandomFlagEntry(class_name, 1.0));
+		config.Flags.Insert(new Tokin_RandomFlagEntry(class_name, 1.0));
 	}
 }

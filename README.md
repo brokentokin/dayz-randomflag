@@ -1,6 +1,6 @@
 # Random Flag
 
-`SoL_RandomFlag` is a folded flag item that a player opens from their hands. After a ten-second `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
+`Tokin_RandomFlag` is a folded flag item that a player opens from their hands. After a two-second `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
 
 The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White` model and texture as its no-asset fallback.
 
@@ -9,7 +9,7 @@ The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White
 The dedicated server creates this file automatically on first start:
 
 ```text
-$profile:SoLMods/RandomFlagConfig.json
+$profile:Tokin/RandomFlagConfig.json
 ```
 
 The generated file contains the 34 `Flag_` entries currently present in Bohemia's Chernarus, Livonia, and Sakhal Central Economy files. Every default entry has an equal weight of `1.0`.
@@ -38,7 +38,7 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 
 ## Opening behavior
 
-- `SoL_RandomFlag` must be in the player's hands and must not be ruined.
+- `Tokin_RandomFlag` must be in the player's hands and must not be ruined.
 - The action lasts two seconds and uses `DayZPlayerConstants.CMD_ACTIONMOD_OPENITEM` while standing or crouching.
 - Selection and item creation happen on the server.
 - DayZ's item-replacement lambda first tries to put the selected item directly into the player's hands.
@@ -51,11 +51,11 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 config.cpp
 mod.cpp
 Scripts/
-  3_Game/RandomFlag/SoL_RandomFlagConfig.c
-  4_World/RandomFlag/Actions/SoL_ActionConstructor.c
-  4_World/RandomFlag/Actions/SoL_ActionOpenFlag.c
-  4_World/RandomFlag/Entities/SoL_RandomFlag.c
-  5_Mission/RandomFlag/SoL_MissionServer.c
+  3_Game/RandomFlag/Tokin_RandomFlagConfig.c
+  4_World/RandomFlag/Actions/Tokin_ActionConstructor.c
+  4_World/RandomFlag/Actions/Tokin_ActionOpenFlag.c
+  4_World/RandomFlag/Entities/Tokin_RandomFlag.c
+  5_Mission/RandomFlag/Tokin_MissionServer.c
 Extras/
   RandomFlagConfig.example.json
 Data/
@@ -68,7 +68,7 @@ Data/
 2. Pack the source with DayZ Tools Addon Builder into a lower-case `addons` directory.
 3. Sign the PBO and place the public key in the mod's lower-case `keys` directory for a production server.
 4. Load the packed mod on both the server and client. It adds a custom item and action, so it is not server-only.
-5. Spawn `SoL_RandomFlag`, place it in the player's hands, and run `Open Flag`.
+5. Spawn `Tokin_RandomFlag`, place it in the player's hands, and run `Open Flag`.
 6. Check the server script log for messages prefixed with `[Random Flag]`.
 
 A Windows environment with DayZ, DayZ Tools, extracted game data, and `DayZDiag_x64.exe` is required for compilation and in-game verification.
@@ -90,4 +90,4 @@ Admin tools such as Community Online Tools can accelerate continuous actions. Di
 
 ## Optional sound hook
 
-`SoL_RandomFlagReplaceLambda.PlayOptionalOpenSound()` is intentionally empty and contains a commented integration note. A future custom sound should be registered in `CfgSoundShaders`/`CfgSoundSets` and triggered through a client RPC so nearby players can hear it. The base mod requires no sound asset or RPC.
+`Tokin_RandomFlagReplaceLambda.PlayOptionalOpenSound()` is intentionally empty and contains a commented integration note. A future custom sound should be registered in `CfgSoundShaders`/`CfgSoundSets` and triggered through a client RPC so nearby players can hear it. The base mod requires no sound asset or RPC.

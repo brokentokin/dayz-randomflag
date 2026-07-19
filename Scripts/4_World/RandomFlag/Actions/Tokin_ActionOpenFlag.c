@@ -1,4 +1,4 @@
-class SoL_ActionOpenFlagCB : ActionContinuousBaseCB
+class Tokin_ActionOpenFlagCB : ActionContinuousBaseCB
 {
 	override void CreateActionComponent()
 	{
@@ -6,11 +6,11 @@ class SoL_ActionOpenFlagCB : ActionContinuousBaseCB
 	}
 }
 
-class SoL_ActionOpenFlag : ActionContinuousBase
+class Tokin_ActionOpenFlag : ActionContinuousBase
 {
-	void SoL_ActionOpenFlag()
+	void Tokin_ActionOpenFlag()
 	{
-		m_CallbackClass = SoL_ActionOpenFlagCB;
+		m_CallbackClass = Tokin_ActionOpenFlagCB;
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENITEM;
 		m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
 		m_Text = "Open Flag";
@@ -29,26 +29,26 @@ class SoL_ActionOpenFlag : ActionContinuousBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
-		SoL_RandomFlag folded_flag = SoL_RandomFlag.Cast(item);
+		Tokin_RandomFlag folded_flag = Tokin_RandomFlag.Cast(item);
 		return folded_flag && player.GetItemInHands() == folded_flag;
 	}
 
 	override void OnFinishProgressServer(ActionData action_data)
 	{
 		PlayerBase player = action_data.m_Player;
-		SoL_RandomFlag folded_flag = SoL_RandomFlag.Cast(action_data.m_MainItem);
+		Tokin_RandomFlag folded_flag = Tokin_RandomFlag.Cast(action_data.m_MainItem);
 
 		if (!player || !folded_flag || player.GetItemInHands() != folded_flag)
 			return;
 
-		string selected_classname = SoL_RandomFlagConfigManager.GetRandomFlagClassName();
+		string selected_classname = Tokin_RandomFlagConfigManager.GetRandomFlagClassName();
 		if (selected_classname == "")
 		{
 			ErrorEx("[Random Flag] Open Flag could not select a valid classname. The Folded Flag was preserved.");
 			return;
 		}
 
-		SoL_RandomFlagReplaceLambda replace_lambda = new SoL_RandomFlagReplaceLambda(folded_flag, selected_classname, player);
+		Tokin_RandomFlagReplaceLambda replace_lambda = new Tokin_RandomFlagReplaceLambda(folded_flag, selected_classname, player);
 		if (!player.ServerReplaceItemInHandsWithNew(replace_lambda))
 		{
 			// A rejected hand event never executes the lambda, so invoke the same
@@ -58,11 +58,11 @@ class SoL_ActionOpenFlag : ActionContinuousBase
 	}
 }
 
-class SoL_RandomFlagReplaceLambda : ReplaceItemWithNewLambda
+class Tokin_RandomFlagReplaceLambda : ReplaceItemWithNewLambda
 {
 	protected bool m_FallbackAttempted;
 
-	void SoL_RandomFlagReplaceLambda(EntityAI old_item, string new_item_type, PlayerBase player)
+	void Tokin_RandomFlagReplaceLambda(EntityAI old_item, string new_item_type, PlayerBase player)
 	{
 		m_FallbackAttempted = false;
 	}

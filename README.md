@@ -39,7 +39,7 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 ## Opening behavior
 
 - `SoL_RandomFlag` must be in the player's hands and must not be ruined.
-- The action lasts ten seconds and uses `DayZPlayerConstants.CMD_ACTIONMOD_OPENITEM` while standing or crouching.
+- The action lasts two seconds and uses `DayZPlayerConstants.CMD_ACTIONMOD_OPENITEM` while standing or crouching.
 - Selection and item creation happen on the server.
 - DayZ's item-replacement lambda first tries to put the selected item directly into the player's hands.
 - If that operation aborts, the mod tries the player's inventory and then the ground at the player's feet.
@@ -83,8 +83,10 @@ The optional custom-texture workflow is documented in `Data/Textures/README.md`.
 4. Temporarily break the JSON syntax and confirm the action preserves the Folded Flag.
 5. Fill the player's inventory and confirm the replacement still goes to the hands.
 6. Use an item that cannot be placed in the hands or inventory and confirm the ground fallback.
-7. Interrupt the action before ten seconds and confirm no item is created or consumed.
+7. Interrupt the action before two seconds and confirm no item is created or consumed.
 8. Repeat the test with two clients to check that only the server creates the selected item.
+
+Admin tools such as Community Online Tools can accelerate continuous actions. Disable any instant/fast-action feature when verifying the configured action duration.
 
 ## Optional sound hook
 

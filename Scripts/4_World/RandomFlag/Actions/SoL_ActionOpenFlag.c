@@ -2,7 +2,7 @@ class SoL_ActionOpenFlagCB : ActionContinuousBaseCB
 {
 	override void CreateActionComponent()
 	{
-		m_ActionData.m_ActionComponent = new CAContinuousTime(10.0);
+		m_ActionData.m_ActionComponent = new CAContinuousTime(2.0);
 	}
 }
 

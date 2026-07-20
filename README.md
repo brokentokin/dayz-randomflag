@@ -2,7 +2,7 @@
 
 `Tokin_RandomFlag` is a folded flag item that a player opens from their hands. After a configurable `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
 
-The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White` model and texture as its no-asset fallback.
+The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White` model with a custom HeyBarmby-themed texture for the Folded Flag.
 
 ## Configuration
 
@@ -69,7 +69,10 @@ Extras/
   RandomFlagConfig.example.json
   types.example.xml
 Data/
-  Textures/README.md
+  Textures/
+    README.md
+    heybarmby_randomflag_co.paa
+    heybarmby_randomflag_co.png
 Workshop/
   description.md
   random-flag-thumbnail-640x360.png
@@ -86,7 +89,7 @@ Workshop/
 
 A Windows environment with DayZ, DayZ Tools, extracted game data, and `DayZDiag_x64.exe` is required for compilation and in-game verification.
 
-The optional custom-texture workflow is documented in `Data/Textures/README.md`. The initial build deliberately inherits the known-good `Flag_White` appearance.
+The custom texture and its editable PNG source are documented in `Data/Textures/README.md`. The item inherits the known-good `Flag_White` model and overrides its single `camo` texture selection.
 
 ### Suggested in-game checks
 

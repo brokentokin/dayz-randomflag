@@ -75,5 +75,9 @@ class CfgVehicles
 		displayName = "Folded Flag";
 		descriptionShort = "A folded flag of unknown design. Open it to reveal the flag inside.";
 		inventorySlot[] = {};
+		hiddenSelectionsTextures[] =
+		{
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa"
+		};
 	};
 };

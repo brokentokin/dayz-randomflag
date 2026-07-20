@@ -1,13 +1,17 @@
-# Optional custom texture
+# HeyBarmby custom texture
 
-The first build of `Tokin_RandomFlag` inherits the vanilla `Flag_White` model and texture. No custom texture is required.
+`Tokin_RandomFlag` inherits the vanilla `Flag_White` model and overrides its single `camo` hidden-selection texture with:
 
-To add a reliable custom retexture later:
+```text
+RandomFlag\Data\Textures\heybarmby_randomflag_co.paa
+```
 
-1. Extract the current `Flag_White` texture with DayZ Tools so the original dimensions, UV placement, alpha channel, and material behavior are preserved.
-2. Paint the custom design over that template without moving UV-dependent details.
-3. Save the editable source outside the packed PBO and export the game texture as a power-of-two `.paa` file in this directory.
-4. Override `hiddenSelectionsTextures[]` on `Tokin_RandomFlag` in `config.cpp`, preserving the same number and order of texture entries used by the current vanilla `Flag_White` config.
-5. Pack with binarization enabled and inspect both the folded inventory view and the world model in DayZDiag.
+The editable 512 x 256 RGBA source is `heybarmby_randomflag_co.png`. When changing it:
 
-Do not add a guessed texture array before checking the extracted current-game config; an incorrect selection count can make the item render with missing or mismatched materials.
+1. Preserve the source dimensions, aspect ratio, and alpha channel.
+2. Export it through TexView as `heybarmby_randomflag_co.paa`.
+3. Replace the PAA in this directory without changing its filename.
+4. Pack with binarization enabled.
+5. Inspect the Folded Flag in inventory, in the player's hands, and on the ground in DayZDiag.
+
+The hidden-selection structure was verified against the DayZ 1.29 `DZ_Gear_Camping` configuration. Recheck the parent `Flag_Base` and `Flag_White` definitions if a future DayZ update changes the model or its selections.

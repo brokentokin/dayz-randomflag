@@ -41,9 +41,12 @@ Community contributions are welcome. GitHub users can report bugs or request fea
 
 https://github.com/brokentokin/dayz-randomflag/blob/main/CONTRIBUTING.md
 [h2]Repacking[/h2]
+[list]
 [*]Feel free to add this to your own server pack.
 [*]I hate mod sprawl. If you have improvements or additional features/changes, please consider contributing to this project vs. forking your own as described above so that all may benefit without adding "yet another mod".
+[/list]
 [h2]Credits[/h2]
+The legend Zenarchist for his many DayZ modding YouTube videos and mod scaffolding template.
 
 [h2]AI Disclosure[/h2]
 AI tools were used to assist with the development and documentation of this mod. The resulting code, functionality, and documentation have been reviewed, tested, and improved by humans.

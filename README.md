@@ -73,6 +73,8 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 ```text
 config.cpp
 mod.cpp
+CONTRIBUTING.md
+LICENSE
 Scripts/
   3_Game/RandomFlag/Tokin_RandomFlagConfig.c
   4_World/RandomFlag/Actions/Tokin_ActionConstructor.c
@@ -118,3 +120,9 @@ Admin tools such as Community Online Tools can accelerate continuous actions. Di
 ## Optional sound hook
 
 `Tokin_RandomFlagReplaceLambda.PlayOptionalOpenSound()` is intentionally empty and contains a commented integration note. A future custom sound should be registered in `CfgSoundShaders`/`CfgSoundSets` and triggered through a client RPC so nearby players can hear it. The base mod requires no sound asset or RPC.
+
+## License
+
+Copyright 2026 Tokin.
+
+Random Flag is licensed under the [DayZ Public License (DPL)](LICENSE). It may be shared and adapted with attribution for noncommercial use in DayZ. See the license for the complete legally binding terms and warranty disclaimer.

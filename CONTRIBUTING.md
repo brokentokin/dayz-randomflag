@@ -9,7 +9,7 @@ Random Flag is a small DayZ mod, but changes can affect clients, servers, persis
 - Report a reproducible bug through [GitHub Issues](https://github.com/brokentokin/dayz-randomflag/issues).
 - Suggest a feature or configuration improvement.
 - Improve installation, packing, Central Economy, or troubleshooting documentation.
-- Update verified vanilla flag or map economy information after a DayZ release.
+- Update verified vanilla flag or economy information after a DayZ release.
 - Submit a pull request that fixes or improves the scripts, examples, or Workshop materials.
 
 Search the existing issues and pull requests before opening a new one. For a substantial feature, configuration-schema change, new dependency, or behavior change, opening an issue first is encouraged so the approach can be discussed before a large amount of work is done.
@@ -103,11 +103,9 @@ When updating the default flag list or `types.example.xml`:
 
 - Use authoritative upstream economy files whenever possible.
 - Record the DayZ version or upstream commit used for the audit.
-- Check ChernarusPlus, Livonia/Enoch, and Sakhal separately.
-- Treat community maps independently. For example, Namalsk has separate regular and hardcore mission economies.
-- Recalculate aggregate `nominal` and `min` values rather than assuming they match another map.
 - Confirm that every default classname still exists in the relevant DayZ configuration.
-- Explain whether server owners must disable or modify existing `Flag_*` economy entries.
+- Present economy files as examples and remind server owners to review every value against their own economy and preferences.
+- Explain that existing flag entries must be disabled when the example is intended to replace rather than supplement their spawns.
 
 ## Testing expectations
 

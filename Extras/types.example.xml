@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <types>
     <!--
-        This entry pools the current vanilla flag economy into Tokin_RandomFlag.
+        This example is based on the Chernarus and Livonia economies.
+        Review every value against your server's economy and preferences before
+        using it.
 
-        ChernarusPlus and Livonia (Enoch): nominal 42, min 21
-        Sakhal:                         nominal 38, min 18
-
-        The entry below defaults to the ChernarusPlus/Livonia totals. On Sakhal,
-        change only nominal to 38 and min to 18.
-
-        Namalsk uses separate regular and hardcore mission economies. Do not use
-        these totals there without reviewing the Namalsk section of the README.
-
-        Before enabling this entry, set nominal and min to 0 on every vanilla
-        Flag_* entry in the mission economy. Otherwise Tokin_RandomFlag will be
-        added on top of the existing vanilla flag spawns.
-
-        Values audited against BohemiaInteractive/DayZ-Central-Economy commit
-        8e769861441f19c32d30ba0d9a074e15b740d917 (DayZ 1.29).
+        To replace existing flag spawns, set nominal and min to 0 on every flag
+        economy entry you want to replace. Otherwise, Tokin_RandomFlag will be
+        added on top of those existing flag spawns.
     -->
     <type name="Tokin_RandomFlag">
         <nominal>42</nominal>

@@ -15,9 +15,9 @@ Random Flag is a Client mod.
 Add the following classname to your types (a sample is included in the extras folder).
 [code]Tokin_RandomFlag[/code]
 
-The sample is designed to replace the combined vanilla flag spawn target on Chernaurus.
+The example types entry is based on Chernarus and Livonia. Review each value and adjust it to your server's economy and preferences before using it.
 
-Set both the nominal and minimum values to [code]0[/code] for every vanilla or other classnames you've added to the Random Flag config. Otherwise Folded Flags will spawn in addition to the vanilla flags.
+If you intend the Folded Flag to replace existing flag spawns, set both the nominal and minimum values to [code]0[/code] on every existing flag types entry you want to replace. Otherwise, Folded Flags will spawn in addition to those flags.
 
 Detailed packing, installation, configuration, weighting examples, and troubleshooting information are available in the repo README:
 

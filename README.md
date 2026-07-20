@@ -18,27 +18,11 @@ Additional classnames from loaded mods may be added. Random Flag does not requir
 
 Restart the server after changing the configuration.
 
-### Replacing vanilla flag spawns
+### Economy example
 
-[`Extras/types.example.xml`](Extras/types.example.xml) contains a Central Economy entry that pools the current vanilla flag spawn target into `Tokin_RandomFlag`.
+[`Extras/types.example.xml`](Extras/types.example.xml) contains an example Central Economy entry for `Tokin_RandomFlag`. Its values are based on Chernarus and Livonia. Treat it as a starting point and review every value against your server's economy and preferences before using it.
 
-| Mission economy | Folded Flag target | What to change in the sample |
-| --- | ---: | --- |
-| ChernarusPlus | `nominal=42`, `min=21` | Nothing; these are the sample defaults. |
-| Livonia (Enoch) | `nominal=42`, `min=21` | Nothing; these are the sample defaults. |
-| Sakhal | `nominal=38`, `min=18` | Change `nominal` to `38` and `min` to `18`. |
-| Namalsk regular | Derive from the installed regular mission | Edit the `regular.namalsk` economy files; do not copy the Bohemia-map totals unchanged. |
-| Namalsk hardcore | Choose a server-specific target | Edit the `hardcore.namalsk` economy files; the current upstream mission has no `Flag_*` entries to pool. |
-
-For every map, set both `<nominal>0</nominal>` and `<min>0</min>` on each existing `Flag_*` entry in the active mission economy. Otherwise Folded Flags will spawn in addition to those flags instead of replacing their aggregate spawn target. Flags already present in persistence may remain until the Central Economy cleans them up normally.
-
-Namalsk-specific notes:
-
-- [Namalsk provides separate `regular.namalsk` and `hardcore.namalsk` mission directories](https://github.com/SumrakDZN/Namalsk-Server/tree/main/Mission%20Files). Make changes only in the edition your server actually loads.
-- Review that edition's `db/types.xml`, `db/types_dzn.xml`, and `cfgeconomycore.xml` together. At the time of this audit, the regular mission defines its flags in `db/types.xml`, while the hardcore mission defines no `Flag_*` entries.
-- Namalsk can update independently of DayZ, so derive the Folded Flag target from the mission files installed on your server.
-
-These totals were audited against Bohemia's DayZ 1.29 Central Economy files at commit [`8e76986`](https://github.com/BohemiaInteractive/DayZ-Central-Economy/tree/8e769861441f19c32d30ba0d9a074e15b740d917). Future DayZ updates may change the vanilla values. The sample preserves the aggregate pre-opening target, but the Central Economy still tracks each classname separately after a Folded Flag is opened.
+If you intend the Folded Flag to replace existing flag spawns, set both `<nominal>0</nominal>` and `<min>0</min>` on every existing flag economy entry you want to replace. Otherwise, Folded Flags will spawn in addition to those flags. Flags already present in persistence may remain until the Central Economy cleans them up normally.
 
 ### Weight examples
 

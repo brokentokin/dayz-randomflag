@@ -55,6 +55,8 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 ## Source layout
 
 ```text
+$PBOPREFIX$
+.gitignore
 config.cpp
 mod.cpp
 CONTRIBUTING.md
@@ -77,12 +79,14 @@ Workshop/
 
 ## Packing and testing
 
-1. Place the source at `P:\RandomFlag`. The included `$PBOPREFIX$` fixes the internal PBO prefix as `RandomFlag`, matching the script paths in `config.cpp`.
-2. Pack the source with DayZ Tools Addon Builder into a lower-case `addons` directory.
-3. Sign the PBO and place the public key in the mod's lower-case `keys` directory for a production server.
-4. Load the packed mod on both the server and client. It adds a custom item and action, so it is not server-only.
-5. Spawn `Tokin_RandomFlag`, place it in the player's hands, and run `Open Flag`.
-6. Check the server script log for messages prefixed with `[Random Flag]`.
+1. Place the source at exactly `P:\RandomFlag`.
+2. Open Addon Builder's options and set **Addon prefix** to exactly `RandomFlag`. This produces the virtual paths used by `config.cpp`, including `RandomFlag/Scripts/...`.
+3. Keep the included `$PBOPREFIX$` file unchanged. It records the same intended namespace for packing tools that support it, but it is not a substitute for setting the prefix in Addon Builder.
+4. Pack the source with DayZ Tools Addon Builder into a lower-case `addons` directory.
+5. Sign the PBO and place the public key in the mod's lower-case `keys` directory for a production server.
+6. Load the packed mod on both the server and client. It adds a custom item and action, so it is not server-only.
+7. Spawn `Tokin_RandomFlag`, place it in the player's hands, and run `Open Flag`.
+8. Check the server script log for messages prefixed with `[Random Flag]`.
 
 A Windows environment with DayZ, DayZ Tools, extracted game data, and `DayZDiag_x64.exe` is required for compilation and in-game verification.
 
@@ -100,6 +104,12 @@ The optional custom-texture workflow is documented in `Data/Textures/README.md`.
 8. Repeat the test with two clients to check that only the server creates the selected item.
 
 Admin tools such as Community Online Tools can accelerate continuous actions. Disable any instant/fast-action feature when verifying the configured action duration.
+
+### Branded replacement builds
+
+The outer mod folder, Steam Workshop title, and `mod.cpp` presentation name may differ from Random Flag while the internal addon prefix remains `RandomFlag`. This is useful for a server-specific retexture that replaces the original build.
+
+A replacement that retains the `RandomFlag` prefix, `Tokin_RandomFlag` config classes, and existing Enforce Script class names must be loaded instead of the original mod, not alongside it. Making two editions safely load together requires a complete internal namespace fork, including the addon prefix, `CfgPatches` and `CfgMods` identifiers, entity and script class names, module paths, profile configuration path, and economy classname references.
 
 ## Optional sound hook
 

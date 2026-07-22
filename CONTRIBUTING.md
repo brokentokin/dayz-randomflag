@@ -66,7 +66,7 @@ Script compilation and in-game verification require Windows with:
 - Addon Builder and the appropriate signing tools.
 - `DayZDiag_x64.exe` when diagnostic testing is needed.
 
-Place the source at `P:\RandomFlag` when following the repository's packing instructions. The included `$PBOPREFIX$` fixes the PBO prefix as `RandomFlag`; do not change it without also updating every dependent script path and thoroughly testing the packed result.
+Place the source at exactly `P:\RandomFlag` when following the repository's packing instructions. In Addon Builder's options, set **Addon prefix** to exactly `RandomFlag`. The included `$PBOPREFIX$` records the intended namespace for compatible packing tools, but contributors must not assume it overrides or replaces Addon Builder's explicit prefix setting. Do not change the internal prefix without also updating every dependent script and asset path and thoroughly testing the packed result.
 
 The mod contains custom scripts and must be loaded by both the client and server. A server-only test is not sufficient.
 

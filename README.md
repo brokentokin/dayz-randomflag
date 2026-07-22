@@ -111,10 +111,6 @@ The outer mod folder, Steam Workshop title, and `mod.cpp` presentation name may 
 
 A replacement that retains the `RandomFlag` prefix, `Tokin_RandomFlag` config classes, and existing Enforce Script class names must be loaded instead of the original mod, not alongside it. Making two editions safely load together requires a complete internal namespace fork, including the addon prefix, `CfgPatches` and `CfgMods` identifiers, entity and script class names, module paths, profile configuration path, and economy classname references.
 
-## Optional sound hook
-
-`Tokin_RandomFlagReplaceLambda.PlayOptionalOpenSound()` is intentionally empty and contains a commented integration note. A future custom sound should be registered in `CfgSoundShaders`/`CfgSoundSets` and triggered through a client RPC so nearby players can hear it. The base mod requires no sound asset or RPC.
-
 ## License
 
 Copyright 2026 Tokin.

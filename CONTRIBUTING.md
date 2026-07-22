@@ -94,7 +94,7 @@ Do not commit packed PBOs, signatures, server profiles, generated logs, private 
 - Maintain the hands, inventory, and ground placement fallback order unless the pull request intentionally changes and documents it.
 - Treat existing server JSON files as a compatibility requirement. New fields should have safe defaults when omitted.
 - Validate external classnames without adding a hard dependency on the mod that supplies them.
-- Do not copy code, models, textures, sounds, or other assets from another mod without clear permission and compatible redistribution terms.
+- Do not copy code, models, textures, or other assets from another mod without clear permission and compatible redistribution terms.
 - Update `README.md`, `Extras/`, and `Workshop/description.md` when user-facing behavior or configuration changes.
 
 ## Economy and classname changes

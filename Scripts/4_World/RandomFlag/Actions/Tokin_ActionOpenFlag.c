@@ -79,7 +79,6 @@ class Tokin_RandomFlagReplaceLambda : ReplaceItemWithNewLambda
 		if (new_item)
 		{
 			Print("[Random Flag] Opened Folded Flag into " + new_item.GetType() + " in the player's hands.");
-			PlayOptionalOpenSound();
 		}
 	}
 
@@ -107,7 +106,6 @@ class Tokin_RandomFlagReplaceLambda : ReplaceItemWithNewLambda
 		{
 			m_OldItem.DeleteSafe();
 			Print("[Random Flag] Opened Folded Flag into " + new_item.GetType() + " in the player's inventory.");
-			PlayOptionalOpenSound();
 			return;
 		}
 
@@ -116,24 +114,9 @@ class Tokin_RandomFlagReplaceLambda : ReplaceItemWithNewLambda
 		{
 			m_OldItem.DeleteSafe();
 			Print("[Random Flag] Opened Folded Flag into " + new_item.GetType() + " on the ground.");
-			PlayOptionalOpenSound();
 			return;
 		}
 
 		ErrorEx("[Random Flag] Could not create " + m_NewItemType + " in hands, inventory, or on the ground. The Folded Flag was preserved.");
-	}
-
-	protected void PlayOptionalOpenSound()
-	{
-		/*
-			Optional custom sound hook, intentionally disabled.
-
-			A multiplayer-ready implementation should send a small RPC to nearby
-			clients, then play a configured SoundSet on those clients with:
-
-			SEffectManager.PlaySound("Your_Open_Flag_SoundSet", m_Player.GetPosition());
-
-			The core mod does not register an RPC or require a sound asset.
-		*/
 	}
 }

@@ -106,10 +106,6 @@ The custom texture and its editable PNG source are documented in `Data/Textures/
 
 Admin tools such as Community Online Tools can accelerate continuous actions. Disable any instant/fast-action feature when verifying the configured action duration.
 
-## Optional sound hook
-
-`Tokin_RandomFlagReplaceLambda.PlayOptionalOpenSound()` is intentionally empty and contains a commented integration note. A future custom sound should be registered in `CfgSoundShaders`/`CfgSoundSets` and triggered through a client RPC so nearby players can hear it. The base mod requires no sound asset or RPC.
-
 ## License
 
 Copyright 2026 Tokin.

@@ -196,6 +196,7 @@ class Tokin_RandomFlagConfigManager
 	{
 		Tokin_RandomFlagConfig config = new Tokin_RandomFlagConfig();
 
+		AddDefaultFlag(config, "Tokin_HeyBarmbyFlag");
 		AddDefaultFlag(config, "Flag_APA");
 		AddDefaultFlag(config, "Flag_Altis");
 		AddDefaultFlag(config, "Flag_BabyDeer");

@@ -4,7 +4,8 @@ class CfgPatches
 	{
 		units[] =
 		{
-			"Tokin_RandomFlag"
+			"Tokin_RandomFlag",
+			"Tokin_HeyBarmbyFlag"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -22,7 +23,7 @@ class CfgMods
 	class Tokin_RandomFlag
 	{
 		dir = "RandomFlag";
-		name = "Random Flag";
+		name = "HBC Random Flag";
 		author = "Tokin";
 		version = "1.0.0";
 		type = "mod";
@@ -75,6 +76,17 @@ class CfgVehicles
 		displayName = "Folded Flag";
 		descriptionShort = "A folded flag of unknown design. Open it to reveal the flag inside.";
 		inventorySlot[] = {};
+		hiddenSelectionsTextures[] =
+		{
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa"
+		};
+	};
+
+	class Tokin_HeyBarmbyFlag : Flag_White
+	{
+		scope = 2;
+		displayName = "HeyBarmby Flag";
+		descriptionShort = "A flag featuring HeyBarmby.";
 		hiddenSelectionsTextures[] =
 		{
 			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa"

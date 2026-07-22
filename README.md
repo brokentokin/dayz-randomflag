@@ -1,6 +1,6 @@
-# Random Flag
+# HBC Random Flag
 
-`Tokin_RandomFlag` is a folded flag item that a player opens from their hands. After a configurable `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
+`Tokin_RandomFlag` is a HeyBarmby-themed folded flag item that a player opens from their hands. After a configurable `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
 
 The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White` model with a custom HeyBarmby-themed texture for the Folded Flag.
 
@@ -12,7 +12,9 @@ The dedicated server creates this file automatically on first start:
 $profile:Tokin/RandomFlagConfig.json
 ```
 
-The generated file contains the 34 `Flag_` entries currently present in Bohemia's Chernarus, Livonia, and Sakhal Central Economy files. Every default entry has an equal weight of `1.0`. It also contains `"OpenActionSeconds": 2.0`; set this to change the opening duration. Existing configuration files that omit it use the embedded two-second default. Configured values below `1.0` are clamped to the one-second minimum.
+The generated file contains the custom `Tokin_HeyBarmbyFlag` and the 34 `Flag_` entries currently present in Bohemia's Chernarus, Livonia, and Sakhal Central Economy files. Every default entry has an equal weight of `1.0`. It also contains `"OpenActionSeconds": 2.0`; set this to change the opening duration. Existing configuration files that omit it use the embedded two-second default. Configured values below `1.0` are clamped to the one-second minimum.
+
+The default file is only generated when no configuration already exists. Servers upgrading from an earlier build must add `{ "ClassName": "Tokin_HeyBarmbyFlag", "Weight": 1.0 }` to their existing `Flags` array manually.
 
 Additional classnames from loaded mods may be added. Random Flag does not require entries to inherit from `Flag_Base`; it only verifies that each classname exists in `CfgVehicles`, `CfgWeapons`, or `CfgMagazines`.
 

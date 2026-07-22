@@ -1,6 +1,6 @@
 # HeyBarmby custom texture
 
-`Tokin_RandomFlag` inherits the vanilla `Flag_White` model and overrides its single `camo` hidden-selection texture with:
+`Tokin_RandomFlag` and the flagpole-compatible `Tokin_HeyBarmbyFlag` inherit the vanilla `Flag_White` model and override its single `camo` hidden-selection texture with:
 
 ```text
 RandomFlag\Data\Textures\heybarmby_randomflag_co.paa

@@ -2,6 +2,7 @@
     "Version": 1,
     "OpenActionSeconds": 2.0,
     "Flags": [
+        { "ClassName": "Tokin_HeyBarmbyFlag", "Weight": 1.0 },
         { "ClassName": "Flag_APA", "Weight": 1.0 },
         { "ClassName": "Flag_Altis", "Weight": 1.0 },
         { "ClassName": "Flag_BabyDeer", "Weight": 1.0 },

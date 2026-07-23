@@ -5,7 +5,8 @@ class CfgPatches
 		units[] =
 		{
 			"Tokin_RandomFlag",
-			"Tokin_HeyBarmbyFlag"
+			"Tokin_HeyBarmbyFlag",
+			"Armband_Tokin_HeyBarmby"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -13,6 +14,7 @@ class CfgPatches
 		{
 			"DZ_Data",
 			"DZ_Scripts",
+			"DZ_Characters_Tops",
 			"DZ_Gear_Camping"
 		};
 	};
@@ -69,6 +71,7 @@ class CfgMods
 class CfgVehicles
 {
 	class Flag_White;
+	class Armband_ColorBase;
 
 	class Tokin_RandomFlag : Flag_White
 	{
@@ -87,8 +90,30 @@ class CfgVehicles
 		scope = 2;
 		displayName = "HeyBarmby Flag";
 		descriptionShort = "A flag featuring HeyBarmby.";
+		color = "Tokin_HeyBarmby";
 		hiddenSelectionsTextures[] =
 		{
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa"
+		};
+	};
+
+	class Armband_Tokin_HeyBarmby : Armband_ColorBase
+	{
+		scope = 2;
+		displayName = "HeyBarmby Armband";
+		descriptionShort = "An armband featuring HeyBarmby, cut from a matching flag.";
+		visibilityModifier = 0.95;
+		color = "Tokin_HeyBarmby";
+		hiddenSelectionsTextures[] =
+		{
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
+			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa",
 			"RandomFlag\Data\Textures\heybarmby_randomflag_co.paa"
 		};
 	};

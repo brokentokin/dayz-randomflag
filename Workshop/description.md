@@ -7,6 +7,7 @@ To use, place the "Folded Flag" in your hands and perform the “Open Flag” ac
 [*]Folded Flag item allows you to control flag spawn rates, even with a large number of possible flag variants.
 [*]Weighted random selection controlled by a JSON configuration. Make some flags common and others ultra rare.
 [*]Includes the custom HeyBarmby flag and 34 vanilla DayZ flag classnames by default; add classnames from other mods or if vanilla changes, or remove classnames to take them out of the selection pool.
+[*]Cut the HeyBarmby flag into three matching HeyBarmby armbands using DayZ's normal flag crafting action.
 [*]"Open Flag" duration is configurable. Default is two seconds, and has a one-second minimum if configured to be less than 1.0.
 [/list]
 [h2]Installation[/h2]
@@ -36,6 +37,10 @@ The generated configuration includes the custom HeyBarmby flag at weight [code]1
 [b]HeyBarmby flag classname:[/b]
 
 [code]Tokin_HeyBarmbyFlag[/code]
+
+[b]HeyBarmby armband classname:[/b]
+
+[code]Armband_Tokin_HeyBarmby[/code]
 
 Set [code]OpenActionSeconds[/code] to control the opening duration. If it is omitted, Random Flag uses two seconds. Values below [code]1.0[/code] are clamped to the one-second minimum.
 

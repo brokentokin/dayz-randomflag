@@ -2,7 +2,7 @@
 
 `Tokin_RandomFlag` is a HeyBarmby-themed folded flag item that a player opens from their hands. After a configurable `Open Flag` action, the server selects a weighted classname from a JSON configuration and replaces the folded item with the selected flag.
 
-The source is written for DayZ 1.29 script APIs and uses the vanilla `Flag_White` model with a custom HeyBarmby-themed texture for the Folded Flag.
+The source is written for DayZ 1.29 script APIs and uses vanilla flag and armband models with a custom HeyBarmby-themed texture.
 
 ## Configuration
 
@@ -54,6 +54,12 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 - If that operation aborts, the mod tries the player's inventory and then the ground at the player's feet.
 - The Folded Flag is preserved when configuration is unusable or all creation attempts fail.
 
+## HeyBarmby flag and armband
+
+`Tokin_HeyBarmbyFlag` is a separate, flagpole-compatible reward classname. Cutting it with a tool supported by DayZ's vanilla flag recipe creates three `Armband_Tokin_HeyBarmby` items.
+
+The flag and armband reuse vanilla models and the included HeyBarmby texture. The custom `color` mapping connects the reward flag to the armband through DayZ's existing crafting recipe. A targeted recipe guard prevents `Tokin_RandomFlag` from being cut into armbands; the Folded Flag can only be opened through `Open Flag`.
+
 ## Source layout
 
 ```text
@@ -66,6 +72,7 @@ Scripts/
   4_World/RandomFlag/Actions/Tokin_ActionConstructor.c
   4_World/RandomFlag/Actions/Tokin_ActionOpenFlag.c
   4_World/RandomFlag/Entities/Tokin_RandomFlag.c
+  4_World/RandomFlag/Recipes/Tokin_CraftArmbandFlag.c
   5_Mission/RandomFlag/Tokin_MissionServer.c
 Extras/
   RandomFlagConfig.example.json
@@ -87,7 +94,8 @@ Workshop/
 3. Sign the PBO and place the public key in the mod's lower-case `keys` directory for a production server.
 4. Load the packed mod on both the server and client. It adds a custom item and action, so it is not server-only.
 5. Spawn `Tokin_RandomFlag`, place it in the player's hands, and run `Open Flag`.
-6. Check the server script log for messages prefixed with `[Random Flag]`.
+6. Spawn or receive `Tokin_HeyBarmbyFlag`, cut it into armbands, and confirm that three `Armband_Tokin_HeyBarmby` items are created.
+7. Check the server script log for messages prefixed with `[Random Flag]`.
 
 A Windows environment with DayZ, DayZ Tools, extracted game data, and `DayZDiag_x64.exe` is required for compilation and in-game verification.
 
@@ -103,6 +111,8 @@ The custom texture and its editable PNG source are documented in `Data/Textures/
 6. Use an item that cannot be placed in the hands or inventory and confirm the ground fallback.
 7. Interrupt the action before its configured duration and confirm no item is created or consumed.
 8. Repeat the test with two clients to check that only the server creates the selected item.
+9. Inspect the HeyBarmby armband on male and female characters, both with and without torso clothing equipped.
+10. Combine a Folded Flag with a cutting tool and confirm that the armband recipe is unavailable.
 
 Admin tools such as Community Online Tools can accelerate continuous actions. Disable any instant/fast-action feature when verifying the configured action duration.
 

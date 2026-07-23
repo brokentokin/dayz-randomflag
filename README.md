@@ -51,6 +51,7 @@ The total is 20, so the chances are 50%, 25%, 15%, and 10%. Values of `1, 2, 7` 
 - DayZ's item-replacement lambda first tries to put the selected item directly into the player's hands.
 - If that operation aborts, the mod tries the player's inventory and then the ground at the player's feet.
 - The Folded Flag is preserved when configuration is unusable or all creation attempts fail.
+- The Folded Flag is excluded from DayZ's vanilla flag-to-armband crafting recipe and can only be opened through `Open Flag`.
 
 ## Source layout
 
@@ -66,6 +67,7 @@ Scripts/
   4_World/RandomFlag/Actions/Tokin_ActionConstructor.c
   4_World/RandomFlag/Actions/Tokin_ActionOpenFlag.c
   4_World/RandomFlag/Entities/Tokin_RandomFlag.c
+  4_World/RandomFlag/Recipes/Tokin_CraftArmbandFlag.c
   5_Mission/RandomFlag/Tokin_MissionServer.c
 Extras/
   RandomFlagConfig.example.json
@@ -102,6 +104,7 @@ The optional custom-texture workflow is documented in `Data/Textures/README.md`.
 6. Use an item that cannot be placed in the hands or inventory and confirm the ground fallback.
 7. Interrupt the action before its configured duration and confirm no item is created or consumed.
 8. Repeat the test with two clients to check that only the server creates the selected item.
+9. Combine a Folded Flag with a cutting tool and confirm that the armband recipe is unavailable.
 
 Admin tools such as Community Online Tools can accelerate continuous actions. Disable any instant/fast-action feature when verifying the configured action duration.
 
